@@ -132,7 +132,7 @@ const scrollToCatalog = () => {
           <p class="hero-desc">Студия Цветов и шаров в Перми. Мы создаём моменты истинной красоты и эстетики.</p>
           
           <div class="hero-actions">
-            <button class="btn btn-primary" @click="scrollToCatalog">Коллекция ↓</button>
+            <button class="btn-premium" @click="scrollToCatalog">Коллекция ↓</button>
           </div>
         </div>
       </div>
@@ -148,7 +148,7 @@ const scrollToCatalog = () => {
       <div v-if="orderSuccess" class="success-message glass">
         <h2>Спасибо за ваш заказ!</h2>
         <p>Мы скоро свяжемся с вами для уточнения деталей доставки.</p>
-        <button class="btn btn-primary" style="margin-top: 20px" @click="orderSuccess = false">Продолжить покупки</button>
+        <button class="btn-premium" style="margin-top: 20px" @click="orderSuccess = false">Продолжить покупки</button>
       </div>
 
       <!-- Grid -->
@@ -183,10 +183,16 @@ const scrollToCatalog = () => {
             <p>Будем рады вас видеть</p>
           </div>
           <div class="info-content">
-            <p><strong>Адрес:</strong> г. Пермь, ул. Маршала Рыбалко 81а<br/>
-            <a href="https://yandex.ru/maps/-/CDu~m-pA" target="_blank" class="map-link">Открыть в Яндекс.Картах ↗</a></p>
-            <p><strong>Время работы:</strong> Ежедневно 10:00 - 21:00</p>
-            <a href="tel:+79655556569" class="btn btn-primary contact-btn">Позвонить: +7 (965) 555-65-69</a>
+            <p style="margin-bottom: 5px;"><strong>Адрес:</strong> г. Пермь, ул. Маршала Рыбалко 81а</p>
+            <a href="https://yandex.ru/maps/-/CDu~m-pA" target="_blank" class="map-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Показать на Яндекс.Картах
+            </a>
+            <p style="margin-top: 20px;"><strong>Время работы:</strong> Ежедневно 10:00 - 21:00</p>
+            
+            <div style="margin-top: 25px;">
+              <a href="tel:+79655556569" class="btn-premium">Позвонить: +7 (965) 555-65-69</a>
+            </div>
           </div>
         </div>
 
@@ -196,6 +202,7 @@ const scrollToCatalog = () => {
             <p>Эстетика в вашей ленте</p>
           </div>
           <div class="info-content">
+            <p>Присоединяйтесь к нам, чтобы не пропустить свежие поставки и специальные предложения!</p>
             <div class="social-links-elegant">
               <a href="https://vk.com/market-43923180" target="_blank" class="social-link">ВКонтакте</a>
               <a href="#" target="_blank" class="social-link">Telegram</a>
@@ -221,7 +228,7 @@ const scrollToCatalog = () => {
           <span class="tag">Флорист</span>
           <h2>Ищем таланты</h2>
           <p>Мы находимся в поиске человека, который любит цветы так же сильно, как мы. Опыт не обязателен — главное чувство прекрасного, а мы научим вас создавать настоящую эстетику.</p>
-          <a href="https://vk.com/market-43923180" target="_blank" class="job-btn">Откликнуться</a>
+          <a href="https://vk.com/market-43923180" target="_blank" class="btn-premium">Откликнуться</a>
         </div>
       </div>
     </section>
@@ -242,7 +249,7 @@ const scrollToCatalog = () => {
           </div>
           <div class="checkout-actions">
             <button type="button" class="btn-text-only" @click="showOrderForm = false">Отмена</button>
-            <button type="submit" class="btn btn-primary">Подтвердить</button>
+            <button type="submit" class="btn-premium">Подтвердить</button>
           </div>
         </form>
       </div>
@@ -254,7 +261,7 @@ const scrollToCatalog = () => {
         <span class="cart-count">В корзине: {{ cart.reduce((acc, item) => acc + item.quantity, 0) }} шт.</span>
         <span class="cart-total">{{ cartTotal }} ₽</span>
       </div>
-      <button class="btn btn-primary">Посмотреть</button>
+      <button class="btn-premium" style="padding: 12px 30px;">Посмотреть</button>
     </div>
 
     <!-- Cart Modal -->
@@ -276,7 +283,7 @@ const scrollToCatalog = () => {
         </div>
         <div class="cart-modal-footer">
           <p class="cart-modal-total">Итого: <strong>{{ cartTotal }} ₽</strong></p>
-          <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" 
+          <button class="btn-premium" style="width: 100%; margin-top: 20px;" 
                   @click="showCart = false; showOrderForm = true">Перейти к оформлению</button>
         </div>
       </div>
@@ -287,6 +294,58 @@ const scrollToCatalog = () => {
 <style scoped>
 .home-wrapper {
   padding-bottom: 30px; 
+}
+
+/* Premium Button Unified */
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 40px;
+  border-radius: 40px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background: transparent;
+  font-family: var(--font-family-base);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--color-text-main);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.4s ease;
+}
+
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, #FFB6C1, #ff8cbf, #93a5cf, #e4efe9);
+  background-size: 300% 300%;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+  opacity: 0;
+  animation: gradientShift 5s ease infinite;
+}
+
+.btn-premium:hover {
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
+  transform: translateY(-3px);
+}
+
+.btn-premium:hover::before {
+  opacity: 1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Immersive Hero */
@@ -312,11 +371,6 @@ const scrollToCatalog = () => {
   object-position: center 30%;
   transform: scale(1.05);
   animation: slowPan 20s infinite alternate linear;
-}
-
-@keyframes slowPan {
-  from { transform: scale(1.05) translateY(0); }
-  to { transform: scale(1.1) translateY(-2%); }
 }
 
 .hero-overlay {
@@ -440,63 +494,68 @@ const scrollToCatalog = () => {
   margin-bottom: 15px;
   color: var(--color-text-main);
 }
-.contact-btn {
-  margin-top: 20px;
-  display: inline-flex;
-}
 
 .map-link {
+  font-family: var(--font-family-base);
   font-size: 0.85rem;
-  color: var(--color-accent-blue);
-  text-decoration: underline;
+  color: var(--color-text-main);
+  text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
-  display: inline-block;
-  margin-top: 5px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 8px 20px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 20px;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 .map-link:hover {
-  color: var(--color-accent-pink);
+  background: var(--color-text-main);
+  color: #fff;
 }
 
-/* Elegant Social Links */
+/* Corrected Elegant Social Links */
 .social-links-elegant {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 30px;
+  margin-top: 25px;
 }
 
 .social-link {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-family-heading);
-  font-size: 2.2rem;
-  color: var(--color-text-main);
+  font-family: var(--font-family-base);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-text-muted);
   text-decoration: none;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  padding-left: 0;
+  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
 }
 
-.social-link::before {
-  content: '→';
+.social-link::after {
+  content: '';
   position: absolute;
-  left: -40px;
-  opacity: 0;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  color: var(--color-accent-pink);
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent-pink);
+  transition: width 0.3s ease;
 }
 
 .social-link:hover {
-  padding-left: 45px;
-  color: var(--color-accent-pink);
+  color: var(--color-text-main);
 }
 
-.social-link:hover::before {
-  left: 0;
-  opacity: 1;
+.social-link:hover::after {
+  width: 100%;
 }
 
 /* Luxury Job Banner */
@@ -551,54 +610,6 @@ const scrollToCatalog = () => {
   line-height: 1.6;
   max-width: 90%;
   margin-bottom: 40px;
-}
-
-.job-btn {
-  border: 1px solid rgba(0,0,0,0.2);
-  background: transparent;
-  padding: 18px 45px;
-  border-radius: 40px;
-  font-family: var(--font-family-base);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  cursor: pointer;
-  color: var(--color-text-main);
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
-}
-
-.job-btn::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(135deg, #FFB6C1, #ff8cbf, #93a5cf, #e4efe9);
-  background-size: 300% 300%;
-  z-index: -1;
-  transition: opacity 0.4s ease;
-  opacity: 0;
-  animation: gradientShift 5s ease infinite;
-}
-
-.job-btn:hover {
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
-  transform: translateY(-3px);
-}
-
-.job-btn:hover::before {
-  opacity: 1;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 @media (max-width: 900px) {
