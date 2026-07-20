@@ -46,7 +46,7 @@ const scrollTo = (id: string) => {
 
 <template>
   <div class="app-wrapper">
-    <header class="header" :class="{ 'header-scrolled': isHeaderSolid }">
+    <header v-if="!route.path.startsWith('/admin') && route.path !== '/login'" class="header" :class="{ 'header-scrolled': isHeaderSolid }">
       <div class="container nav-container">
         <router-link to="/" class="brand">
           <span class="brand-text">Цветы и Воздух</span>
@@ -71,7 +71,7 @@ const scrollTo = (id: string) => {
       <router-view></router-view>
     </main>
     
-    <footer class="footer">
+    <footer v-if="!route.path.startsWith('/admin') && route.path !== '/login'" class="footer">
       <div class="container">
         <div class="footer-top">
           <div class="footer-brand">

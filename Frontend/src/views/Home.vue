@@ -15,6 +15,7 @@ interface CartItem extends Flower {
 }
 
 const flowers = ref<Flower[]>([]);
+const vacancies = ref<any[]>([]);
 const cart = ref<CartItem[]>([]);
 const loading = ref(true);
 
@@ -59,10 +60,14 @@ const cartTotal = computed(() => {
 
 onMounted(async () => {
   try {
-    const response = await apiClient.get('/catalog/flowers');
-    flowers.value = response.data;
+    const [fRes, vRes] = await Promise.all([
+      apiClient.get('/catalog/flowers'),
+      apiClient.get('/catalog/vacancies')
+    ]);
+    flowers.value = fRes.data;
+    vacancies.value = vRes.data;
   } catch (error) {
-    console.error("Failed to fetch catalog", error);
+    console.error("Failed to fetch data", error);
   } finally {
     loading.value = false;
   }
@@ -217,20 +222,20 @@ const scrollToCatalog = () => {
     </section>
 
     <!-- Job Banner section (Redesigned) -->
-    <section id="vacancies-section" class="container animate-fade-in" style="margin-top: 100px; margin-bottom: 80px;">
+    <section v-if="vacancies.length > 0" id="vacancies-section" class="container animate-fade-in" style="margin-top: 100px; margin-bottom: 80px;">
       <div class="section-header">
         <h2>Вакансии</h2>
         <p>Присоединяйтесь к нашей команде</p>
       </div>
       
-      <div class="job-banner-luxury glass">
+      <div v-for="vacancy in vacancies" :key="vacancy.id" class="job-banner-luxury glass" style="margin-bottom: 30px;">
         <div class="job-img-side">
-          <img src="/catalog/softy.jpg" alt="Работа флористом" />
+          <img src="/catalog/softy.jpg" alt="Работа в Цветы и Воздух" />
         </div>
         <div class="job-content-side">
-          <span class="tag">Флорист</span>
+          <span class="tag">{{ vacancy.title }}</span>
           <h2>Ищем таланты</h2>
-          <p>Мы находимся в поиске человека, который любит цветы так же сильно, как мы. Опыт не обязателен — главное чувство прекрасного, а мы научим вас создавать настоящую эстетику.</p>
+          <p>{{ vacancy.description }}</p>
           <a href="https://vk.com/market-43923180" target="_blank" class="btn-premium">Откликнуться</a>
         </div>
       </div>
@@ -541,22 +546,12 @@ const scrollToCatalog = () => {
   position: relative;
   z-index: 1;
   transition: color 0.3s ease, transform 0.3s ease;
-}
-.contact-phone-link::before {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%; height: 160%;
-  border-radius: 40px;
-  background: radial-gradient(circle, rgba(220,163,183,0.15) 0%, rgba(220,163,183,0) 70%);
-  z-index: -1;
-  animation: soft-pulse 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
+  animation: text-pulse 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 .contact-phone-link:hover {
   color: var(--color-accent-pink);
   transform: translateY(-2px);
+  animation: none;
 }
 
 /* Minimalist Social Links */
@@ -577,24 +572,13 @@ const scrollToCatalog = () => {
   width: fit-content;
   transition: color 0.3s ease;
   line-height: 1.2;
-}
-
-.social-text-link::before {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 140%; height: 180%;
-  border-radius: 20px;
-  background: radial-gradient(circle, rgba(220,163,183,0.15) 0%, rgba(220,163,183,0) 70%);
-  z-index: -1;
-  animation: soft-pulse 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  animation: text-pulse 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
   animation-delay: 1.5s;
-  pointer-events: none;
 }
 
 .social-text-link:hover {
   color: var(--color-accent-pink);
+  animation: none;
 }
 
 
@@ -1028,10 +1012,10 @@ const scrollToCatalog = () => {
   .fab-call { bottom: 20px; right: 20px; width: 55px; height: 55px; }
 }
 
-@keyframes soft-pulse {
-  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; }
+@keyframes text-pulse {
+  0% { text-shadow: 0 0 0 rgba(220,163,183,0); }
+  50% { text-shadow: 0 0 20px rgba(220,163,183,0.8), 0 0 40px rgba(220,163,183,0.4); }
+  100% { text-shadow: 0 0 0 rgba(220,163,183,0); }
 }
 
 /* Floating Call Button */

@@ -60,5 +60,15 @@ public static class PublicEndpoints
 
             return Results.Ok(categories);
         });
+
+        group.MapGet("/vacancies", async (AppDbContext dbContext) =>
+        {
+            var vacancies = await dbContext.Vacancies
+                .AsNoTracking()
+                .Where(v => v.IsActive)
+                .ToListAsync();
+
+            return Results.Ok(vacancies);
+        });
     }
 }

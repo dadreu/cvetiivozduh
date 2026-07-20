@@ -73,8 +73,40 @@ public static class AdminEndpoints
             var imageUrl = $"/uploads/{newFileName}";
             return Results.Ok(new { imageUrl });
         });
-        // Remove Antiforgery requirement just for the upload endpoint during local testing 
-        // if needed, or rely on the frontend sending X-CSRF-TOKEN.
-        // We'll let it be protected by Antiforgery as configured globally.
+        // Vacancies CRUD
+        group.MapGet("/vacancies", async (AppDbContext dbContext) =>
+        {
+            return Results.Ok(await dbContext.Vacancies.AsNoTracking().ToListAsync());
+        });
+
+        group.MapPost("/vacancies", async (Vacancy vacancy, AppDbContext dbContext) =>
+        {
+            dbContext.Vacancies.Add(vacancy);
+            await dbContext.SaveChangesAsync();
+            return Results.Created($"/api/admin/vacancies", vacancy);
+        });
+
+        group.MapPut("/vacancies/{id}", async (int id, Vacancy updated, AppDbContext dbContext) =>
+        {
+            var vacancy = await dbContext.Vacancies.FindAsync(id);
+            if (vacancy == null) return Results.NotFound();
+
+            vacancy.Title = updated.Title;
+            vacancy.Description = updated.Description;
+            vacancy.IsActive = updated.IsActive;
+
+            await dbContext.SaveChangesAsync();
+            return Results.NoContent();
+        });
+
+        group.MapDelete("/vacancies/{id}", async (int id, AppDbContext dbContext) =>
+        {
+            var vacancy = await dbContext.Vacancies.FindAsync(id);
+            if (vacancy == null) return Results.NotFound();
+
+            dbContext.Vacancies.Remove(vacancy);
+            await dbContext.SaveChangesAsync();
+            return Results.NoContent();
+        });
     }
 }

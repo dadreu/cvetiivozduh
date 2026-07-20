@@ -72,5 +72,18 @@ public static class DataSeeder
                 await context.SaveChangesAsync();
             }
         }
+        // Seed Vacancies if empty
+        if (!await context.Vacancies.AnyAsync())
+        {
+            context.Vacancies.AddRange(
+                new Vacancy 
+                { 
+                    Title = "Флорист", 
+                    Description = "Мы находимся в поиске человека, который любит цветы так же сильно, как мы. Опыт не обязателен — главное чувство прекрасного, а мы научим вас создавать настоящую эстетику.",
+                    IsActive = true
+                }
+            );
+            await context.SaveChangesAsync();
+        }
     }
 }
