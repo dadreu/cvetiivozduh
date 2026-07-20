@@ -50,11 +50,11 @@ public static class DataSeeder
             if (category != null)
             {
                 context.Flowers.AddRange(
-                    new Flower { Name = "Композиция из гипсофилы 💙", Description = "Цветы и Воздух", Price = 1300, CategoryId = category.Id },
-                    new Flower { Name = "Композиция", Description = "Цветы и Воздух", Price = 3800, CategoryId = category.Id },
-                    new Flower { Name = "Композиция французских роз", Description = "Цветы и Воздух", Price = 3500, CategoryId = category.Id },
-                    new Flower { Name = "Композиция пчелка 🐝", Description = "Цветы и Воздух", Price = 1900, CategoryId = category.Id },
-                    new Flower { Name = "Вместо «Я тебя ЛЮБЛЮ 🌸»", Description = "Цветы и Воздух", Price = 3250, CategoryId = category.Id },
+                    new Flower { Name = "Композиция из гипсофилы 💙", Description = "Цветы и Воздух", Price = 1300, ImageUrl = "/catalog/gypsofils.jpg", CategoryId = category.Id },
+                    new Flower { Name = "Композиция", Description = "Цветы и Воздух", Price = 3800, ImageUrl = "/catalog/compose2.jpg", CategoryId = category.Id },
+                    new Flower { Name = "Композиция французских роз", Description = "Цветы и Воздух", Price = 3500, ImageUrl = "/catalog/frenchRose.jpg", CategoryId = category.Id },
+                    new Flower { Name = "Композиция пчелка 🐝", Description = "Цветы и Воздух", Price = 1900, ImageUrl = "/catalog/bee.jpg", CategoryId = category.Id },
+                    new Flower { Name = "Вместо «Я тебя ЛЮБЛЮ 🌸»", Description = "Цветы и Воздух", Price = 3250, ImageUrl = "/catalog/i love u.jpg", CategoryId = category.Id },
                     new Flower { Name = "Нежная зефирка", Description = "Цветы и Воздух", Price = 2950, CategoryId = category.Id },
                     new Flower { Name = "Голубое облачко", Description = "Цветы и Воздух", Price = 2850, CategoryId = category.Id },
                     new Flower { Name = "Персиковый букет", Description = "Цветы и Воздух", Price = 1800, CategoryId = category.Id },
