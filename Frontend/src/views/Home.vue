@@ -5,6 +5,7 @@ import apiClient from '@/api/axios';
 interface Flower {
   id: number;
   name: string;
+  description: string;
   price: number;
   imageUrl: string;
 }
@@ -18,7 +19,7 @@ const cart = ref<CartItem[]>([]);
 const loading = ref(true);
 
 const showOrderForm = ref(false);
-const showCart = ref(false); // Управление модальным окном корзины
+const showCart = ref(false); 
 const customerName = ref('');
 const customerPhone = ref('');
 const deliveryAddress = ref('');
@@ -110,22 +111,17 @@ const scrollToCatalog = () => {
         <img src="/catalog/frenchRose.jpg" alt="Фон" class="hero-img" />
         <div class="hero-overlay"></div>
       </div>
+      <!-- Changed to center alignment for perfect symmetry -->
       <div class="container hero-content">
         <div class="hero-text-box glass">
           <div class="hero-logo-wrap">
             <img src="@/images/logo.jpg" alt="Логотип Цветы и Воздух" class="hero-logo" />
           </div>
           <h1>Эмоции,<br/>воплощенные<br/>в цветах</h1>
+          <p class="hero-desc">Студия Цветов и шаров в Перми. Мы создаём моменты истинной красоты и эстетики.</p>
           
-          <div class="hero-contacts">
-            <p>📍 г. Пермь, ул. Маршала Рыбалко 81а</p>
-            <p>🕒 Ежедневно 10:00 - 21:00</p>
-          </div>
-
           <div class="hero-actions">
-            <a href="tel:+79655556569" class="btn btn-primary">Позвонить</a>
-            <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline">ВКонтакте</a>
-            <button class="btn btn-text-only" @click="scrollToCatalog">Коллекция ↓</button>
+            <button class="btn btn-primary" @click="scrollToCatalog">Коллекция ↓</button>
           </div>
         </div>
       </div>
@@ -153,7 +149,10 @@ const scrollToCatalog = () => {
           <div class="card-img-wrap">
             <img :src="getImageUrl(flower)" :alt="flower.name" class="card-img" />
             <div class="card-overlay">
-              <button class="add-btn" @click="addToCart(flower)" aria-label="Добавить">В корзину</button>
+              <div class="overlay-content">
+                <p class="flower-desc" v-if="flower.description">{{ flower.description }}</p>
+                <button class="add-btn" @click.stop="addToCart(flower)" aria-label="Добавить">В корзину</button>
+              </div>
             </div>
           </div>
           <div class="card-content">
@@ -164,16 +163,46 @@ const scrollToCatalog = () => {
       </div>
     </section>
 
-    <!-- Job Banner moved BELOW catalog -->
-    <section class="highlight-section container animate-fade-in">
+    <!-- Job Banner section -->
+    <section id="vacancies-section" class="container animate-fade-in" style="margin-top: 80px;">
+      <div class="section-header">
+        <h2>Вакансии</h2>
+        <p>Присоединяйтесь к нашей команде</p>
+      </div>
       <div class="job-banner glass">
         <div class="job-content">
-          <span class="tag">Команда</span>
+          <span class="tag">Флорист</span>
           <h2>Ищем таланты</h2>
-          <p>Мы находимся в поиске флориста. Опыт не обязателен, главное — чувство прекрасного.</p>
+          <p>Мы находимся в поиске флориста. Опыт не обязателен, главное — чувство прекрасного и желание учиться создавать красоту.</p>
         </div>
         <div class="job-action">
-          <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline">Присоединиться</a>
+          <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline">Откликнуться</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacts & Socials -->
+    <section id="contacts-section" class="container section-split">
+      <div class="info-block glass">
+        <div class="section-header-small">
+          <h2>Наши Контакты</h2>
+          <p>Будем рады вас видеть</p>
+        </div>
+        <div class="info-content">
+          <p><strong>Адрес:</strong> г. Пермь, ул. Маршала Рыбалко 81а</p>
+          <p><strong>Время работы:</strong> Ежедневно 10:00 - 21:00</p>
+          <a href="tel:+79655556569" class="btn btn-primary contact-btn">Позвонить: +7 (965) 555-65-69</a>
+        </div>
+      </div>
+
+      <div class="info-block glass">
+        <div class="section-header-small">
+          <h2>Мы в соцсетях</h2>
+          <p>Следите за новинками</p>
+        </div>
+        <div class="info-content">
+          <p>Присоединяйтесь к нам ВКонтакте и наслаждайтесь красотой цветов вместе с нами 🌷</p>
+          <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline contact-btn">Перейти ВКонтакте</a>
         </div>
       </div>
     </section>
@@ -238,7 +267,7 @@ const scrollToCatalog = () => {
 
 <style scoped>
 .home-wrapper {
-  padding-bottom: 50px;
+  padding-bottom: 30px; /* Reduced from 50px */
 }
 
 /* Immersive Hero */
@@ -274,52 +303,58 @@ const scrollToCatalog = () => {
 .hero-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to right, rgba(248, 247, 245, 0.9) 0%, rgba(248, 247, 245, 0.4) 100%);
+  background: rgba(0,0,0,0.3); /* Changed to symmetric dark overlay */
 }
 
 .hero-content {
   width: 100%;
   padding-top: 80px; 
+  display: flex;
+  justify-content: center; /* PERFECT SYMMETRY */
 }
 
 .hero-text-box {
-  max-width: 600px;
-  padding: 50px;
+  max-width: 650px;
+  padding: 60px;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.85); /* Slightly more opaque */
+  text-align: center; /* Center text */
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
 }
 
 .hero-logo-wrap {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
 }
 
 .hero-logo {
-  width: 150px; /* Увеличенный логотип */
-  height: 150px;
+  width: 160px; /* Even larger logo */
+  height: 160px;
   border-radius: 50%;
   box-shadow: var(--shadow-ambient);
   object-fit: cover;
+  border: 4px solid #fff; /* Elegant border */
 }
 
 .hero h1 {
   font-size: 4.5rem;
   margin-bottom: 20px;
   color: var(--color-text-main);
+  line-height: 1.1;
 }
 
-.hero-contacts {
-  margin: 30px 0;
+.hero-desc {
   font-size: 1.1rem;
-  line-height: 1.8;
-  color: var(--color-text-main);
-  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-bottom: 30px;
+  line-height: 1.6;
 }
 
 .hero-actions {
   display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .btn-text-only {
@@ -331,20 +366,44 @@ const scrollToCatalog = () => {
   cursor: pointer;
   color: var(--color-text-muted);
   transition: color 0.3s ease;
-  margin-left: 10px;
 }
 .btn-text-only:hover {
   color: var(--color-accent-pink);
 }
 
-/* Highlight Banner */
-.highlight-section {
-  position: relative;
-  z-index: 10;
-  margin-top: 100px;
-  margin-bottom: 120px;
+/* Sections */
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
 }
 
+.section-header h2 {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: var(--color-accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.section-header-small {
+  margin-bottom: 30px;
+}
+.section-header-small h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.section-header-small p {
+  color: var(--color-accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+}
+
+/* Job Banner */
 .job-banner {
   display: flex;
   justify-content: space-between;
@@ -352,6 +411,7 @@ const scrollToCatalog = () => {
   padding: 50px 60px;
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.85);
+  margin-bottom: 80px; /* Spacing below job banner */
 }
 
 .tag {
@@ -375,22 +435,28 @@ const scrollToCatalog = () => {
   max-width: 500px;
 }
 
-/* Section Header */
-.section-header {
-  text-align: center;
-  margin-bottom: 80px;
+/* Contacts & Socials Split */
+.section-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px; /* Reduced from 120px to connect better with footer */
 }
 
-.section-header h2 {
-  font-size: 3.5rem;
-  margin-bottom: 10px;
+.info-block {
+  padding: 50px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.85);
 }
 
-.section-header p {
+.info-content p {
   font-size: 1.1rem;
-  color: var(--color-accent-blue);
-  text-transform: uppercase;
-  letter-spacing: 3px;
+  margin-bottom: 15px;
+  color: var(--color-text-main);
+}
+.contact-btn {
+  margin-top: 20px;
+  display: inline-flex;
 }
 
 /* Bento Grid */
@@ -409,6 +475,9 @@ const scrollToCatalog = () => {
   .bento-large {
     grid-column: span 1;
     grid-row: span 1;
+  }
+  .section-split {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -444,14 +513,30 @@ const scrollToCatalog = () => {
 
 .card-overlay {
   position: absolute;
-  bottom: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%);
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
   opacity: 0;
   transition: opacity 0.4s ease;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   padding: 30px;
+}
+
+.overlay-content {
+  text-align: center;
+  transform: translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.flower-desc {
+  color: #fff;
+  font-family: var(--font-family-base);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  font-style: italic;
+  padding: 0 20px;
 }
 
 .bento-card:hover .card-img {
@@ -460,6 +545,10 @@ const scrollToCatalog = () => {
 
 .bento-card:hover .card-overlay {
   opacity: 1;
+}
+
+.bento-card:hover .overlay-content {
+  transform: translateY(0);
 }
 
 .add-btn {
@@ -475,16 +564,11 @@ const scrollToCatalog = () => {
   font-weight: 500;
   cursor: pointer;
   color: var(--color-text-main);
-  transform: translateY(20px);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bento-card:hover .add-btn {
-  transform: translateY(0);
-}
-
 .add-btn:hover {
-  background: var(--color-text-main);
+  background: var(--color-accent-pink);
   color: #fff;
 }
 
