@@ -164,7 +164,7 @@ const deleteVacancy = async (id: number) => {
               <tbody>
                 <tr v-for="item in flowers" :key="item.id">
                   <td>
-                    <img v-if="item.imageUrl" :src="item.imageUrl.startsWith('http') ? item.imageUrl : `http://localhost:5185${item.imageUrl}`" class="td-img" />
+                    <img v-if="item.imageUrl" :src="item.imageUrl" class="td-img" />
                     <span v-else>Нет фото</span>
                   </td>
                   <td>{{ item.name }}</td>
@@ -241,7 +241,7 @@ const deleteVacancy = async (id: number) => {
             <label>Фотография (загрузка)</label>
             <input type="file" @change="uploadImage" accept="image/*" />
             <div v-if="flowerForm.imageUrl" class="img-preview">
-              <img :src="flowerForm.imageUrl.startsWith('http') ? flowerForm.imageUrl : `http://localhost:5185${flowerForm.imageUrl}`" />
+              <img :src="flowerForm.imageUrl" />
             </div>
           </div>
           <div class="modal-actions">

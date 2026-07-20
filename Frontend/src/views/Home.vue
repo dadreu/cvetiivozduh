@@ -233,8 +233,8 @@ const scrollToCatalog = () => {
           <img src="/catalog/softy.jpg" alt="Работа в Цветы и Воздух" />
         </div>
         <div class="job-content-side">
-          <span class="tag">{{ vacancy.title }}</span>
-          <h2>Ищем таланты</h2>
+          <span class="tag">Ищем таланты</span>
+          <h2>{{ vacancy.title }}</h2>
           <p>{{ vacancy.description }}</p>
           <a href="https://vk.com/market-43923180" target="_blank" class="btn-premium">Откликнуться</a>
         </div>
@@ -546,12 +546,10 @@ const scrollToCatalog = () => {
   position: relative;
   z-index: 1;
   transition: color 0.3s ease, transform 0.3s ease;
-  animation: text-pulse 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 .contact-phone-link:hover {
   color: var(--color-accent-pink);
   transform: translateY(-2px);
-  animation: none;
 }
 
 /* Minimalist Social Links */
@@ -572,13 +570,10 @@ const scrollToCatalog = () => {
   width: fit-content;
   transition: color 0.3s ease;
   line-height: 1.2;
-  animation: text-pulse 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
-  animation-delay: 1.5s;
 }
 
 .social-text-link:hover {
   color: var(--color-accent-pink);
-  animation: none;
 }
 
 
@@ -1010,12 +1005,6 @@ const scrollToCatalog = () => {
   .hero-text-box { padding: 40px 30px; }
   .cart-sticky { bottom: 90px; right: 20px; left: 20px; justify-content: space-between; }
   .fab-call { bottom: 20px; right: 20px; width: 55px; height: 55px; }
-}
-
-@keyframes text-pulse {
-  0% { text-shadow: 0 0 0 rgba(220,163,183,0); }
-  50% { text-shadow: 0 0 20px rgba(220,163,183,0.8), 0 0 40px rgba(220,163,183,0.4); }
-  100% { text-shadow: 0 0 0 rgba(220,163,183,0); }
 }
 
 /* Floating Call Button */
