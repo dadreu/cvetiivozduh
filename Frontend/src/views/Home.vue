@@ -18,6 +18,7 @@ const cart = ref<CartItem[]>([]);
 const loading = ref(true);
 
 const showOrderForm = ref(false);
+const showCart = ref(false); // Управление модальным окном корзины
 const customerName = ref('');
 const customerPhone = ref('');
 const deliveryAddress = ref('');
@@ -36,7 +37,6 @@ const fallbacks = [
 
 const getImageUrl = (flower: Flower) => {
   if (flower.imageUrl) return flower.imageUrl;
-  // Use modulo on ID to get a consistent pseudo-random image
   return fallbacks[flower.id % fallbacks.length];
 };
 
@@ -64,6 +64,14 @@ const addToCart = (flower: Flower) => {
   }
 };
 
+const removeFromCart = (flowerId: number) => {
+  cart.value = cart.value.filter(item => item.id !== flowerId);
+  if (cart.value.length === 0) {
+    showCart.value = false;
+    showOrderForm.value = false;
+  }
+};
+
 const placeOrder = async () => {
   if (!customerName.value || !customerPhone.value) return;
 
@@ -81,6 +89,7 @@ const placeOrder = async () => {
     await apiClient.post('/catalog/order', orderData);
     orderSuccess.value = true;
     cart.value = [];
+    showCart.value = false;
     showOrderForm.value = false;
   } catch (error) {
     console.error("Order failed", error);
@@ -107,24 +116,17 @@ const scrollToCatalog = () => {
             <img src="@/images/logo.jpg" alt="Логотип Цветы и Воздух" class="hero-logo" />
           </div>
           <h1>Эмоции,<br/>воплощенные<br/>в цветах</h1>
-          <p>Студия Цветов и шаров в Перми. Мы создаём моменты истинной красоты и эстетики.</p>
-          <div class="hero-actions">
-            <button class="btn btn-primary" @click="scrollToCatalog">Смотреть коллекцию</button>
+          
+          <div class="hero-contacts">
+            <p>📍 г. Пермь, ул. Маршала Рыбалко 81а</p>
+            <p>🕒 Ежедневно 10:00 - 21:00</p>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Job Banner / Highlight -->
-    <section class="highlight-section container animate-fade-in" style="animation-delay: 0.2s">
-      <div class="job-banner glass">
-        <div class="job-content">
-          <span class="tag">Команда</span>
-          <h2>Ищем таланты</h2>
-          <p>Мы находимся в поиске флориста. Опыт не обязателен, главное — чувство прекрасного.</p>
-        </div>
-        <div class="job-action">
-          <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline">Присоединиться</a>
+          <div class="hero-actions">
+            <a href="tel:+79655556569" class="btn btn-primary">Позвонить</a>
+            <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline">ВКонтакте</a>
+            <button class="btn btn-text-only" @click="scrollToCatalog">Коллекция ↓</button>
+          </div>
         </div>
       </div>
     </section>
@@ -140,36 +142,6 @@ const scrollToCatalog = () => {
         <h2>Спасибо за ваш заказ!</h2>
         <p>Мы скоро свяжемся с вами для уточнения деталей доставки.</p>
         <button class="btn btn-primary" style="margin-top: 20px" @click="orderSuccess = false">Продолжить покупки</button>
-      </div>
-
-      <div v-if="cart.length > 0 && !showOrderForm && !orderSuccess" class="cart-sticky glass">
-        <div class="cart-info">
-          <span class="cart-count">В корзине: {{ cart.reduce((acc, item) => acc + item.quantity, 0) }} шт.</span>
-          <span class="cart-total">{{ cartTotal }} ₽</span>
-        </div>
-        <button class="btn btn-primary" @click="showOrderForm = true">Оформить</button>
-      </div>
-
-      <!-- Checkout Form -->
-      <div v-if="showOrderForm" class="checkout-wrapper">
-        <div class="checkout-card glass">
-          <h3>Оформление заказа</h3>
-          <form @submit.prevent="placeOrder">
-            <div class="input-group">
-              <input type="text" v-model="customerName" required placeholder="Ваше Имя" />
-            </div>
-            <div class="input-group">
-              <input type="tel" v-model="customerPhone" required placeholder="Телефон" />
-            </div>
-            <div class="input-group">
-              <input type="text" v-model="deliveryAddress" placeholder="Адрес доставки (необяз.)" />
-            </div>
-            <div class="checkout-actions">
-              <button type="button" class="btn-text" @click="showOrderForm = false">Отмена</button>
-              <button type="submit" class="btn btn-primary">Подтвердить</button>
-            </div>
-          </form>
-        </div>
       </div>
 
       <!-- Grid -->
@@ -191,22 +163,92 @@ const scrollToCatalog = () => {
         </article>
       </div>
     </section>
+
+    <!-- Job Banner moved BELOW catalog -->
+    <section class="highlight-section container animate-fade-in">
+      <div class="job-banner glass">
+        <div class="job-content">
+          <span class="tag">Команда</span>
+          <h2>Ищем таланты</h2>
+          <p>Мы находимся в поиске флориста. Опыт не обязателен, главное — чувство прекрасного.</p>
+        </div>
+        <div class="job-action">
+          <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline">Присоединиться</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checkout Form -->
+    <div v-if="showOrderForm" class="container checkout-wrapper">
+      <div class="checkout-card glass">
+        <h3>Оформление заказа</h3>
+        <form @submit.prevent="placeOrder">
+          <div class="input-group">
+            <input type="text" v-model="customerName" required placeholder="Ваше Имя" />
+          </div>
+          <div class="input-group">
+            <input type="tel" v-model="customerPhone" required placeholder="Телефон" />
+          </div>
+          <div class="input-group">
+            <input type="text" v-model="deliveryAddress" placeholder="Адрес доставки (необяз.)" />
+          </div>
+          <div class="checkout-actions">
+            <button type="button" class="btn-text-only" @click="showOrderForm = false">Отмена</button>
+            <button type="submit" class="btn btn-primary">Подтвердить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Sticky Cart Trigger -->
+    <div v-if="cart.length > 0 && !showOrderForm && !orderSuccess" class="cart-sticky glass" @click="showCart = true">
+      <div class="cart-info">
+        <span class="cart-count">В корзине: {{ cart.reduce((acc, item) => acc + item.quantity, 0) }} шт.</span>
+        <span class="cart-total">{{ cartTotal }} ₽</span>
+      </div>
+      <button class="btn btn-primary">Посмотреть</button>
+    </div>
+
+    <!-- Cart Modal -->
+    <div v-if="showCart" class="modal-overlay" @click.self="showCart = false">
+      <div class="cart-modal glass">
+        <div class="modal-header">
+          <h3>Корзина</h3>
+          <button @click="showCart = false" class="close-btn">×</button>
+        </div>
+        <div class="cart-items">
+          <div v-for="item in cart" :key="item.id" class="cart-item">
+            <img :src="getImageUrl(item)" class="cart-item-img" />
+            <div class="cart-item-info">
+              <h4>{{ item.name }}</h4>
+              <p>{{ item.price }} ₽ x {{ item.quantity }}</p>
+            </div>
+            <button @click="removeFromCart(item.id)" class="remove-btn">Удалить</button>
+          </div>
+        </div>
+        <div class="cart-modal-footer">
+          <p class="cart-modal-total">Итого: <strong>{{ cartTotal }} ₽</strong></p>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" 
+                  @click="showCart = false; showOrderForm = true">Перейти к оформлению</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .home-wrapper {
-  padding-bottom: 100px;
+  padding-bottom: 50px;
 }
 
 /* Immersive Hero */
 .hero {
   position: relative;
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 .hero-bg {
@@ -237,14 +279,14 @@ const scrollToCatalog = () => {
 
 .hero-content {
   width: 100%;
-  padding-top: 80px; /* Offset for fixed header */
+  padding-top: 80px; 
 }
 
 .hero-text-box {
-  max-width: 550px;
-  padding: 60px;
+  max-width: 600px;
+  padding: 50px;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .hero-logo-wrap {
@@ -252,10 +294,11 @@ const scrollToCatalog = () => {
 }
 
 .hero-logo {
-  width: 80px;
-  height: 80px;
+  width: 150px; /* Увеличенный логотип */
+  height: 150px;
   border-radius: 50%;
   box-shadow: var(--shadow-ambient);
+  object-fit: cover;
 }
 
 .hero h1 {
@@ -264,18 +307,41 @@ const scrollToCatalog = () => {
   color: var(--color-text-main);
 }
 
-.hero p {
+.hero-contacts {
+  margin: 30px 0;
   font-size: 1.1rem;
-  color: var(--color-text-muted);
-  margin-bottom: 40px;
   line-height: 1.8;
+  color: var(--color-text-main);
+  font-weight: 500;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-text-only {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: color 0.3s ease;
+  margin-left: 10px;
+}
+.btn-text-only:hover {
+  color: var(--color-accent-pink);
 }
 
 /* Highlight Banner */
 .highlight-section {
-  margin-top: -150px;
   position: relative;
   z-index: 10;
+  margin-top: 100px;
   margin-bottom: 120px;
 }
 
@@ -443,7 +509,7 @@ const scrollToCatalog = () => {
   color: var(--color-text-muted);
 }
 
-/* Sticky Cart */
+/* Cart Modal & Sticky */
 .cart-sticky {
   position: fixed;
   bottom: 40px;
@@ -453,10 +519,16 @@ const scrollToCatalog = () => {
   display: flex;
   align-items: center;
   gap: 30px;
-  z-index: 100;
+  z-index: 90;
   background: rgba(255,255,255,0.85);
   box-shadow: var(--shadow-float);
   animation: fadeInUp 0.5s ease;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.cart-sticky:hover {
+  transform: translateY(-5px);
 }
 
 .cart-info {
@@ -476,11 +548,125 @@ const scrollToCatalog = () => {
   font-weight: 600;
 }
 
+/* Modal Layout */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(5px);
+  z-index: 2000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-modal {
+  width: 100%;
+  max-width: 450px;
+  height: 100%;
+  background: #fff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.modal-header h3 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: var(--color-text-main);
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.cart-item-img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-info h4 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.cart-item-info p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: var(--color-accent-pink);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  text-decoration: underline;
+}
+
+.cart-modal-footer {
+  padding-top: 30px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.cart-modal-total {
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Checkout */
 .checkout-wrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 100px;
+  margin-top: 50px;
 }
 
 .checkout-card {
@@ -523,20 +709,6 @@ const scrollToCatalog = () => {
   justify-content: space-between;
   align-items: center;
   margin-top: 40px;
-}
-
-.btn-text {
-  background: none;
-  border: none;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  color: var(--color-text-muted);
-}
-
-.btn-text:hover {
-  color: var(--color-text-main);
 }
 
 .success-message {

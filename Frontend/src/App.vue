@@ -36,7 +36,6 @@ const logout = async () => {
           <router-link to="/">Коллекция</router-link>
           <router-link v-if="authStore.isAuthenticated" to="/admin">Админка</router-link>
           <button class="nav-btn" v-if="authStore.isAuthenticated" @click="logout">Выйти</button>
-          <router-link class="nav-btn" v-else to="/login">Вход</router-link>
         </nav>
       </div>
     </header>
