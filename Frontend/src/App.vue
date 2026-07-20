@@ -71,24 +71,31 @@ const scrollTo = (id: string) => {
         <div class="footer-top">
           <div class="footer-brand">
             <h2 class="footer-logo">Цветы и Воздух</h2>
-            <p>Место, где мы создаём моменты радости, праздника и тонкой красоты.</p>
+            <p>Пермь, ул. Маршала Рыбалко 81а<br/>Место, где мы создаём моменты радости, праздника и тонкой красоты.</p>
           </div>
           <div class="footer-links">
             <div class="link-column">
-              <h4>Навигация</h4>
-              <a href="javascript:void(0)" @click="scrollTo('catalog-section')" class="footer-link">Коллекция</a>
-              <a href="javascript:void(0)" @click="scrollTo('vacancies-section')" class="footer-link">Вакансии</a>
-              <a href="javascript:void(0)" @click="scrollTo('contacts-section')" class="footer-link">Контакты</a>
+              <h4>Покупателям</h4>
+              <a href="javascript:void(0)" @click="scrollTo('catalog-section')" class="footer-link">Наша Коллекция</a>
+              <a href="#" class="footer-link">Оплата и доставка</a>
+              <a href="#" class="footer-link">Условия возврата</a>
+            </div>
+            <div class="link-column">
+              <h4>Компания</h4>
+              <a href="javascript:void(0)" @click="scrollTo('contacts-section')" class="footer-link">Наши Контакты</a>
+              <a href="javascript:void(0)" @click="scrollTo('vacancies-section')" class="footer-link">Вакансии флориста</a>
+              <a href="#" class="footer-link">О нас</a>
             </div>
             <div class="link-column">
               <h4>Связь</h4>
+              <p>Ежедневно 10:00 - 21:00</p>
               <p>+7 (965) 555-65-69</p>
-              <a href="https://vk.com/market-43923180" target="_blank" class="footer-link">ВКонтакте</a>
+              <a href="https://vk.com/market-43923180" target="_blank" class="footer-link" style="margin-top: 15px; text-decoration: underline;">Мы ВКонтакте</a>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2024 Цветы и Воздух. Все права защищены.</p>
+          <p>&copy; 2024 Цветы и Воздух. Студия Цветов и шаров. Все права защищены. Разработано с душой.</p>
         </div>
       </div>
     </footer>
@@ -115,7 +122,7 @@ const scrollTo = (id: string) => {
 
 .header-scrolled {
   padding: 15px 0;
-  background: rgba(253, 251, 249, 0.9);
+  background: rgba(253, 251, 249, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -138,8 +145,15 @@ const scrollTo = (id: string) => {
   font-family: var(--font-family-heading);
   font-size: 1.8rem;
   font-weight: 600;
-  color: var(--color-text-main);
+  color: #fff;
   letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  transition: color 0.3s ease;
+}
+
+.header-scrolled .brand-text {
+  color: var(--color-text-main);
+  text-shadow: none;
 }
 
 .nav-links {
@@ -153,12 +167,20 @@ const scrollTo = (id: string) => {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: var(--color-text-main);
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
   background: none;
   border: none;
   cursor: pointer;
   position: relative;
   padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+.header-scrolled .nav-links a,
+.header-scrolled .nav-btn {
+  color: var(--color-text-main);
+  text-shadow: none;
 }
 
 .nav-links a::after, .nav-btn::after {
@@ -187,14 +209,27 @@ const scrollTo = (id: string) => {
   font-family: var(--font-family-base);
   font-weight: 600;
   font-size: 0.95rem;
-  color: var(--color-text-main);
-  border: 1px solid var(--color-text-main);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.2);
   padding: 8px 20px;
   border-radius: 30px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.header-scrolled .phone-link {
+  color: var(--color-text-main);
+  border-color: var(--color-text-main);
+  background: transparent;
 }
 
 .phone-link:hover {
+  background: #fff;
+  color: var(--color-text-main);
+}
+
+.header-scrolled .phone-link:hover {
   background: var(--color-text-main);
   color: #fff;
 }

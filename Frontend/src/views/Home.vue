@@ -163,8 +163,39 @@ const scrollToCatalog = () => {
       </div>
     </section>
 
+    <!-- Contacts & Socials -->
+    <section id="contacts-section" class="container section-split">
+      <div class="info-block glass">
+        <div class="section-header-small">
+          <h2>Наши Контакты</h2>
+          <p>Будем рады вас видеть</p>
+        </div>
+        <div class="info-content">
+          <p><strong>Адрес:</strong> г. Пермь, ул. Маршала Рыбалко 81а</p>
+          <p><strong>Время работы:</strong> Ежедневно 10:00 - 21:00</p>
+          
+          <div class="map-container" style="margin: 20px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-ambient);">
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ae0236a29bc62e3d36b28b6d3923f7e52003cba7dbab58ceeb8dc563b72ea98c4&amp;source=constructor" width="100%" height="250" frameborder="0"></iframe>
+          </div>
+
+          <a href="tel:+79655556569" class="btn btn-primary contact-btn">Позвонить: +7 (965) 555-65-69</a>
+        </div>
+      </div>
+
+      <div class="info-block glass">
+        <div class="section-header-small">
+          <h2>Мы в соцсетях</h2>
+          <p>Следите за новинками</p>
+        </div>
+        <div class="info-content">
+          <p>Присоединяйтесь к нам ВКонтакте и наслаждайтесь красотой цветов вместе с нами 🌷. Мы регулярно публикуем новые поступления, акции и рассказываем об искусстве флористики.</p>
+          <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline contact-btn">Перейти ВКонтакте</a>
+        </div>
+      </div>
+    </section>
+
     <!-- Job Banner section -->
-    <section id="vacancies-section" class="container animate-fade-in" style="margin-top: 80px;">
+    <section id="vacancies-section" class="container animate-fade-in" style="margin-bottom: 80px;">
       <div class="section-header">
         <h2>Вакансии</h2>
         <p>Присоединяйтесь к нашей команде</p>
@@ -177,32 +208,6 @@ const scrollToCatalog = () => {
         </div>
         <div class="job-action">
           <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline">Откликнуться</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contacts & Socials -->
-    <section id="contacts-section" class="container section-split">
-      <div class="info-block glass">
-        <div class="section-header-small">
-          <h2>Наши Контакты</h2>
-          <p>Будем рады вас видеть</p>
-        </div>
-        <div class="info-content">
-          <p><strong>Адрес:</strong> г. Пермь, ул. Маршала Рыбалко 81а</p>
-          <p><strong>Время работы:</strong> Ежедневно 10:00 - 21:00</p>
-          <a href="tel:+79655556569" class="btn btn-primary contact-btn">Позвонить: +7 (965) 555-65-69</a>
-        </div>
-      </div>
-
-      <div class="info-block glass">
-        <div class="section-header-small">
-          <h2>Мы в соцсетях</h2>
-          <p>Следите за новинками</p>
-        </div>
-        <div class="info-content">
-          <p>Присоединяйтесь к нам ВКонтакте и наслаждайтесь красотой цветов вместе с нами 🌷</p>
-          <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline contact-btn">Перейти ВКонтакте</a>
         </div>
       </div>
     </section>
