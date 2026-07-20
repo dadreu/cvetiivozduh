@@ -174,7 +174,7 @@ const scrollToCatalog = () => {
       </div>
     </section>
 
-    <!-- Contacts & Socials (MOVED UP) -->
+    <!-- Contacts & Socials -->
     <section id="contacts-section" class="container" style="margin-top: 100px;">
       <div class="section-split">
         <div class="info-block glass">
@@ -183,7 +183,8 @@ const scrollToCatalog = () => {
             <p>Будем рады вас видеть</p>
           </div>
           <div class="info-content">
-            <p><strong>Адрес:</strong> г. Пермь, ул. Маршала Рыбалко 81а</p>
+            <p><strong>Адрес:</strong> г. Пермь, ул. Маршала Рыбалко 81а<br/>
+            <a href="https://yandex.ru/maps/-/CDu~m-pA" target="_blank" class="map-link">Открыть в Яндекс.Картах ↗</a></p>
             <p><strong>Время работы:</strong> Ежедневно 10:00 - 21:00</p>
             <a href="tel:+79655556569" class="btn btn-primary contact-btn">Позвонить: +7 (965) 555-65-69</a>
           </div>
@@ -192,45 +193,35 @@ const scrollToCatalog = () => {
         <div class="info-block glass">
           <div class="section-header-small">
             <h2>Мы в соцсетях</h2>
-            <p>Следите за новинками</p>
+            <p>Эстетика в вашей ленте</p>
           </div>
           <div class="info-content">
-            <p>Присоединяйтесь к нам, чтобы не пропустить свежие поставки и специальные предложения!</p>
-            <div class="social-buttons">
-              <a href="https://vk.com/market-43923180" target="_blank" class="social-btn btn-vk">
-                ВКонтакте
-              </a>
-              <a href="#" class="social-btn btn-tg">
-                Telegram
-              </a>
-              <a href="#" class="social-btn btn-inst">
-                Instagram
-              </a>
+            <div class="social-links-elegant">
+              <a href="https://vk.com/market-43923180" target="_blank" class="social-link">ВКонтакте</a>
+              <a href="#" target="_blank" class="social-link">Telegram</a>
+              <a href="#" target="_blank" class="social-link">Instagram</a>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Map separated and full-width -->
-      <div class="map-container glass">
-        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ae0236a29bc62e3d36b28b6d3923f7e52003cba7dbab58ceeb8dc563b72ea98c4&amp;source=constructor" width="100%" height="350" frameborder="0"></iframe>
-      </div>
     </section>
 
-    <!-- Job Banner section -->
+    <!-- Job Banner section (Redesigned) -->
     <section id="vacancies-section" class="container animate-fade-in" style="margin-top: 100px; margin-bottom: 80px;">
       <div class="section-header">
         <h2>Вакансии</h2>
         <p>Присоединяйтесь к нашей команде</p>
       </div>
-      <div class="job-banner glass">
-        <div class="job-content">
+      
+      <div class="job-banner-luxury glass">
+        <div class="job-img-side">
+          <img src="/catalog/softy.jpg" alt="Работа флористом" />
+        </div>
+        <div class="job-content-side">
           <span class="tag">Флорист</span>
           <h2>Ищем таланты</h2>
-          <p>Мы находимся в поиске флориста. Опыт не обязателен, главное — чувство прекрасного и желание учиться создавать красоту.</p>
-        </div>
-        <div class="job-action">
-          <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline">Откликнуться</a>
+          <p>Мы находимся в поиске человека, который любит цветы так же сильно, как мы. Опыт не обязателен — главное чувство прекрасного, а мы научим вас создавать настоящую эстетику.</p>
+          <a href="https://vk.com/market-43923180" target="_blank" class="job-btn">Откликнуться</a>
         </div>
       </div>
     </section>
@@ -431,37 +422,6 @@ const scrollToCatalog = () => {
   font-size: 0.9rem;
 }
 
-/* Job Banner */
-.job-banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 50px 60px;
-  border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.85);
-}
-
-.tag {
-  display: inline-block;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--color-accent-pink);
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-.job-content h2 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-}
-
-.job-content p {
-  color: var(--color-text-muted);
-  font-size: 1.1rem;
-  max-width: 500px;
-}
-
 /* Contacts & Socials Split */
 .section-split {
   display: grid;
@@ -485,65 +445,173 @@ const scrollToCatalog = () => {
   display: inline-flex;
 }
 
-/* Social Buttons */
-.social-buttons {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-top: 25px;
-}
-.social-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px;
-  border-radius: 12px;
-  color: #fff !important;
-  font-weight: 600;
+.map-link {
+  font-size: 0.85rem;
+  color: var(--color-accent-blue);
+  text-decoration: underline;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-top: 5px;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
-.social-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-.social-btn::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%; width: 50%; height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
-  transform: skewX(-20deg);
-  transition: 0.5s;
-}
-.social-btn:hover::before {
-  left: 150%;
-}
-.btn-vk {
-  background: linear-gradient(135deg, #0077FF, #0055CC);
-}
-.btn-tg {
-  background: linear-gradient(135deg, #2AABEE, #229ED9);
-}
-.btn-inst {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+.map-link:hover {
+  color: var(--color-accent-pink);
 }
 
-.map-container {
-  margin-top: 40px;
+/* Elegant Social Links */
+.social-links-elegant {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-family-heading);
+  font-size: 2.2rem;
+  color: var(--color-text-main);
+  text-decoration: none;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-left: 0;
+}
+
+.social-link::before {
+  content: '→';
+  position: absolute;
+  left: -40px;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--color-accent-pink);
+}
+
+.social-link:hover {
+  padding-left: 45px;
+  color: var(--color-accent-pink);
+}
+
+.social-link:hover::before {
+  left: 0;
+  opacity: 1;
+}
+
+/* Luxury Job Banner */
+.job-banner-luxury {
+  display: flex;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-ambient);
-  padding: 10px;
   background: rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shadow-ambient);
 }
-.map-container iframe {
-  border-radius: calc(var(--radius-lg) - 5px);
-  display: block;
+
+.job-img-side {
+  flex: 0 0 45%;
+  position: relative;
+}
+
+.job-img-side img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.job-content-side {
+  padding: 60px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-accent-pink);
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.job-content-side h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.job-content-side p {
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 90%;
+  margin-bottom: 40px;
+}
+
+.job-btn {
+  border: 1px solid rgba(0,0,0,0.2);
+  background: transparent;
+  padding: 18px 45px;
+  border-radius: 40px;
+  font-family: var(--font-family-base);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--color-text-main);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.job-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, #FFB6C1, #ff8cbf, #93a5cf, #e4efe9);
+  background-size: 300% 300%;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+  opacity: 0;
+  animation: gradientShift 5s ease infinite;
+}
+
+.job-btn:hover {
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
+  transform: translateY(-3px);
+}
+
+.job-btn:hover::before {
+  opacity: 1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 900px) {
+  .job-banner-luxury {
+    flex-direction: column;
+  }
+  .job-img-side {
+    flex: none;
+    height: 300px;
+  }
+  .job-content-side {
+    padding: 40px 30px;
+  }
 }
 
 /* Bento Grid */
@@ -905,7 +973,6 @@ const scrollToCatalog = () => {
 @media (max-width: 768px) {
   .hero h1 { font-size: 3rem; }
   .hero-text-box { padding: 40px 30px; }
-  .job-banner { flex-direction: column; text-align: center; gap: 30px; padding: 40px 30px; }
   .cart-sticky { bottom: 20px; right: 20px; left: 20px; justify-content: space-between; }
 }
 </style>
