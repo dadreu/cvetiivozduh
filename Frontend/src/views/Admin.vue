@@ -162,7 +162,7 @@ const deleteVacancy = async (id: number) => {
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in flowers" :key="item.id">
+                <tr v-for="item in flowers" :key="item.id" @click="openFlowerModal(item)" class="clickable-row">
                   <td>
                     <img v-if="item.imageUrl" :src="item.imageUrl" class="td-img" />
                     <span v-else>Нет фото</span>
@@ -170,8 +170,8 @@ const deleteVacancy = async (id: number) => {
                   <td>{{ item.name }}</td>
                   <td>{{ item.price }} ₽</td>
                   <td>
-                    <button class="btn-text" @click="openFlowerModal(item)">Ред.</button>
-                    <button class="btn-text text-danger" @click="deleteFlower(item.id)">Удалить</button>
+                    <button class="btn-text" @click.stop="openFlowerModal(item)">Ред.</button>
+                    <button class="btn-text text-danger" @click.stop="deleteFlower(item.id)">Удалить</button>
                   </td>
                 </tr>
               </tbody>
@@ -195,7 +195,7 @@ const deleteVacancy = async (id: number) => {
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in vacancies" :key="item.id">
+                <tr v-for="item in vacancies" :key="item.id" @click="openVacancyModal(item)" class="clickable-row">
                   <td>{{ item.title }}</td>
                   <td>
                     <span :class="item.isActive ? 'badge-active' : 'badge-inactive'">
@@ -203,8 +203,8 @@ const deleteVacancy = async (id: number) => {
                     </span>
                   </td>
                   <td>
-                    <button class="btn-text" @click="openVacancyModal(item)">Ред.</button>
-                    <button class="btn-text text-danger" @click="deleteVacancy(item.id)">Удалить</button>
+                    <button class="btn-text" @click.stop="openVacancyModal(item)">Ред.</button>
+                    <button class="btn-text text-danger" @click.stop="deleteVacancy(item.id)">Удалить</button>
                   </td>
                 </tr>
               </tbody>
@@ -297,9 +297,9 @@ const deleteVacancy = async (id: number) => {
 
 .admin-brand {
   font-family: var(--font-family-heading);
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--color-text-main);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-accent-pink);
   margin-bottom: 40px;
   line-height: 1.2;
 }
@@ -477,10 +477,58 @@ const deleteVacancy = async (id: number) => {
 .admin-form textarea,
 .admin-form select {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  padding: 12px 15px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+  background: #fafafa;
   font-family: var(--font-family-base);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+  border-color: var(--color-accent-pink);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(220,163,183,0.15);
+}
+
+.admin-form input[type="file"] {
+  font-family: var(--font-family-base);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.admin-form input[type="file"]::file-selector-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: #fff;
+  color: var(--color-text-main);
+  font-family: var(--font-family-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 15px;
+}
+
+.admin-form input[type="file"]::file-selector-button:hover {
+  background: #fafafa;
+  border-color: var(--color-accent-pink);
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.clickable-row:hover {
+  background: #fafafa;
 }
 
 .checkbox-group {

@@ -56,9 +56,6 @@ const scrollTo = (id: string) => {
           <a href="javascript:void(0)" @click="scrollTo('catalog-section')">Коллекция</a>
           <a href="javascript:void(0)" @click="scrollTo('vacancies-section')">Вакансии</a>
           <a href="javascript:void(0)" @click="scrollTo('contacts-section')">Контакты</a>
-          
-          <router-link v-if="authStore.isAuthenticated" to="/admin">Админка</router-link>
-          <button class="nav-btn" v-if="authStore.isAuthenticated" @click="logout">Выйти</button>
         </nav>
 
         <div class="header-phone">

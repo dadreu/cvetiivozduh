@@ -222,21 +222,34 @@ const scrollToCatalog = () => {
     </section>
 
     <!-- Job Banner section (Redesigned) -->
-    <section v-if="vacancies.length > 0" id="vacancies-section" class="container animate-fade-in" style="margin-top: 100px; margin-bottom: 80px;">
+    <section id="vacancies-section" class="container animate-fade-in" style="margin-top: 100px; margin-bottom: 80px;">
       <div class="section-header">
         <h2>Вакансии</h2>
         <p>Присоединяйтесь к нашей команде</p>
       </div>
       
-      <div v-for="vacancy in vacancies" :key="vacancy.id" class="job-banner-luxury glass" style="margin-bottom: 30px;">
-        <div class="job-img-side">
-          <img src="/catalog/softy.jpg" alt="Работа в Цветы и Воздух" />
+      <div v-if="vacancies.length > 0">
+        <div v-for="vacancy in vacancies" :key="vacancy.id" class="job-banner-luxury glass" style="margin-bottom: 30px;">
+          <div class="job-img-side">
+            <img src="/catalog/softy.jpg" alt="Работа в Цветы и Воздух" />
+          </div>
+          <div class="job-content-side">
+            <span class="tag">Ищем таланты</span>
+            <h2>{{ vacancy.title }}</h2>
+            <p>{{ vacancy.description }}</p>
+            <a href="https://vk.com/market-43923180" target="_blank" class="btn-premium">Откликнуться</a>
+          </div>
         </div>
-        <div class="job-content-side">
-          <span class="tag">Ищем таланты</span>
-          <h2>{{ vacancy.title }}</h2>
-          <p>{{ vacancy.description }}</p>
-          <a href="https://vk.com/market-43923180" target="_blank" class="btn-premium">Откликнуться</a>
+      </div>
+      
+      <div v-else class="empty-vacancies glass">
+        <h3>Сейчас у нас нет открытых вакансий</h3>
+        <p>Но мы всегда рады знакомству с талантливыми флористами! Подписывайтесь на наши соцсети, чтобы первыми узнавать о новых предложениях.</p>
+        <div class="social-text-links" style="justify-content: center; margin-top: 25px; grid-template-columns: repeat(4, max-content);">
+          <a href="https://vk.com/market-43923180" target="_blank" class="social-text-link">ВКонтакте</a>
+          <a href="#" target="_blank" class="social-text-link">Telegram</a>
+          <a href="#" target="_blank" class="social-text-link">Instagram</a>
+          <a href="#" target="_blank" class="social-text-link">WhatsApp</a>
         </div>
       </div>
     </section>
@@ -312,57 +325,7 @@ const scrollToCatalog = () => {
   padding-bottom: 30px; 
 }
 
-/* Premium Button Unified */
-.btn-premium {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px 40px;
-  border-radius: 40px;
-  border: 1px solid rgba(0,0,0,0.2);
-  background: transparent;
-  font-family: var(--font-family-base);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  cursor: pointer;
-  color: var(--color-text-main);
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: all 0.4s ease;
-}
 
-.btn-premium::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(135deg, #FFB6C1, #ff8cbf, #93a5cf, #e4efe9);
-  background-size: 300% 300%;
-  z-index: -1;
-  transition: opacity 0.4s ease;
-  opacity: 0;
-  animation: gradientShift 5s ease infinite;
-}
-
-.btn-premium:hover {
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
-  transform: translateY(-3px);
-}
-
-.btn-premium:hover::before {
-  opacity: 1;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
 
 /* Immersive Hero */
 .hero {
@@ -584,6 +547,7 @@ const scrollToCatalog = () => {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.85);
   box-shadow: var(--shadow-ambient);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .job-img-side {
@@ -799,6 +763,29 @@ const scrollToCatalog = () => {
 .cart-sticky:hover {
   transform: translateY(-5px);
 }
+.job-banner-luxury:hover {
+  transform: translateY(-5px);
+}
+
+.empty-vacancies {
+  text-align: center;
+  padding: 60px 40px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+.empty-vacancies h3 {
+  font-family: var(--font-family-heading);
+  font-size: 1.6rem;
+  color: var(--color-text-main);
+  margin-bottom: 15px;
+}
+.empty-vacancies p {
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
 
 .cart-info {
   display: flex;
