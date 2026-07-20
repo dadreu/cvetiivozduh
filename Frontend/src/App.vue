@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth';
-import { useRouter } from 'vue-router';
-import { ref, onMounted, onUnmounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 
 const authStore = useAuthStore();
 const router = useRouter();
+const route = useRoute();
 const scrolled = ref(false);
+
+const isHeaderSolid = computed(() => {
+  return scrolled.value || route.path !== '/';
+});
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 50;
@@ -41,7 +46,7 @@ const scrollTo = (id: string) => {
 
 <template>
   <div class="app-wrapper">
-    <header class="header" :class="{ 'header-scrolled': scrolled }">
+    <header class="header" :class="{ 'header-scrolled': isHeaderSolid }">
       <div class="container nav-container">
         <router-link to="/" class="brand">
           <span class="brand-text">Цветы и Воздух</span>

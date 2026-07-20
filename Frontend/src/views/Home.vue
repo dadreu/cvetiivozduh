@@ -291,6 +291,14 @@ const scrollToCatalog = () => {
         </div>
       </div>
     </div>
+    
+    <!-- Floating Action Button for Call -->
+    <a href="tel:+79655556569" class="fab-call" aria-label="Позвонить нам">
+      <div class="fab-wave"></div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+    </a>
   </div>
 </template>
 
@@ -530,7 +538,21 @@ const scrollToCatalog = () => {
   font-weight: 500;
   display: inline-block;
   margin-top: 15px;
+  position: relative;
+  z-index: 1;
   transition: color 0.3s ease, transform 0.3s ease;
+}
+.contact-phone-link::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%; height: 160%;
+  border-radius: 40px;
+  background: radial-gradient(circle, rgba(220,163,183,0.15) 0%, rgba(220,163,183,0) 70%);
+  z-index: -1;
+  animation: soft-pulse 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 .contact-phone-link:hover {
   color: var(--color-accent-pink);
@@ -539,9 +561,9 @@ const scrollToCatalog = () => {
 
 /* Minimalist Social Links */
 .social-text-links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 10px;
   margin-top: 20px;
 }
 
@@ -551,9 +573,24 @@ const scrollToCatalog = () => {
   color: var(--color-text-muted);
   text-decoration: none;
   position: relative;
+  z-index: 1;
   width: fit-content;
   transition: color 0.3s ease;
   line-height: 1.2;
+}
+
+.social-text-link::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%; height: 180%;
+  border-radius: 20px;
+  background: radial-gradient(circle, rgba(220,163,183,0.15) 0%, rgba(220,163,183,0) 70%);
+  z-index: -1;
+  animation: soft-pulse 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  animation-delay: 1.5s;
+  pointer-events: none;
 }
 
 .social-text-link:hover {
@@ -765,7 +802,7 @@ const scrollToCatalog = () => {
 /* Cart Modal & Sticky */
 .cart-sticky {
   position: fixed;
-  bottom: 40px;
+  bottom: 120px;
   right: 40px;
   padding: 20px 30px;
   border-radius: 40px;
@@ -987,6 +1024,52 @@ const scrollToCatalog = () => {
 @media (max-width: 768px) {
   .hero h1 { font-size: 3rem; }
   .hero-text-box { padding: 40px 30px; }
-  .cart-sticky { bottom: 20px; right: 20px; left: 20px; justify-content: space-between; }
+  .cart-sticky { bottom: 90px; right: 20px; left: 20px; justify-content: space-between; }
+  .fab-call { bottom: 20px; right: 20px; width: 55px; height: 55px; }
+}
+
+@keyframes soft-pulse {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; }
+}
+
+/* Floating Call Button */
+.fab-call {
+  position: fixed;
+  bottom: 40px; 
+  right: 40px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: var(--color-accent-pink);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(220, 163, 183, 0.5);
+  z-index: 85;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.fab-call:hover {
+  transform: scale(1.08) translateY(-5px);
+  background: var(--color-accent-terracotta);
+}
+
+.fab-wave {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent-pink);
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-ring {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
 }
 </style>
