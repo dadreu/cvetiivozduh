@@ -350,7 +350,7 @@ const scrollToCatalog = () => {
   object-position: center 30%;
   transform: scale(1.05);
   animation: slowPan 20s infinite alternate linear;
-  transition: filter 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: filter 0.4s ease-out;
 }
 
 .hero:has(.hero-text-box:hover) .hero-img {
@@ -377,7 +377,7 @@ const scrollToCatalog = () => {
   background: rgba(255, 255, 255, 0.85); 
   text-align: center; 
   box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.7s cubic-bezier(0.19, 1, 0.22, 1), background 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, background 0.4s ease-out;
 }
 
 .hero-text-box:hover {
@@ -631,17 +631,16 @@ const scrollToCatalog = () => {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 40px;
+  grid-auto-flow: dense;
 }
 
 .bento-large {
   grid-column: span 2;
-  grid-row: span 2;
 }
 
 @media (max-width: 900px) {
   .bento-large {
     grid-column: span 1;
-    grid-row: span 1;
   }
   .section-split {
     grid-template-columns: 1fr;
