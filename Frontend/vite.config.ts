@@ -1,16 +1,12 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-import prerender from 'vite-plugin-prerender'
+// import prerender from 'vite-plugin-prerender'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
-    prerender({
-      staticDir: path.join(__dirname, 'dist'),
-      routes: ['/'],
-    })
+    vue()
   ],
   resolve: {
     alias: {
@@ -19,8 +15,8 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': 'http://localhost:5000',
-      '/uploads': 'http://localhost:5000'
+      '/api': 'http://localhost:5185',
+      '/uploads': 'http://localhost:5185'
     }
   }
 })

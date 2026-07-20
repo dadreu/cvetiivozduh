@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.DataProtection;
 using System.IO;
 using FlowerShop.Backend.Data;
 using FlowerShop.Backend.Endpoints;
+using FlowerShop.Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ var keysDirectory = new DirectoryInfo(Path.Combine(builder.Environment.ContentRo
 builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(keysDirectory)
     .SetApplicationName("FlowerShop");
+
+builder.Services.AddSingleton<INotificationService, TelegramNotificationService>();
 
 // 2. Cookie Authentication Config
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -44,12 +47,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContextPool<AppDbContext>(options =>
 {
-    var serverVersion = new MySqlServerVersion(new Version(8, 0, 32));
-    options.UseMySql(connectionString, serverVersion, mysqlOptions =>
-    {
-        mysqlOptions.EnableRetryOnFailure();
-        mysqlOptions.EnableIndexOptimizedBooleanColumns();
-    });
+    options.UseInMemoryDatabase("FlowerShopLocal");
 });
 
 // 4. Anti-forgery Config
@@ -96,6 +94,9 @@ app.MapGet("/", () => "FlowerShop API is running");
 // Register Modular Endpoints
 app.MapAuthEndpoints();
 app.MapPublicEndpoints();
+app.MapOrderEndpoints();
 app.MapAdminEndpoints();
 
 app.Run();
+
+public partial class Program { }

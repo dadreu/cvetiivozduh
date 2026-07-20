@@ -115,3 +115,5 @@ C:\Users\dadre\Documents\sources\Flow\Backend\obj\Debug\net9.0\refint\FlowerShop
 C:\Users\dadre\Documents\sources\Flow\Backend\obj\Debug\net9.0\FlowerShop.Backend.pdb
 C:\Users\dadre\Documents\sources\Flow\Backend\obj\Debug\net9.0\FlowerShop.Backend.genruntimeconfig.cache
 C:\Users\dadre\Documents\sources\Flow\Backend\obj\Debug\net9.0\ref\FlowerShop.Backend.dll
+C:\Users\dadre\Documents\sources\Flow\Backend\obj\Debug\net9.0\FlowerShop.Backend.sourcelink.json
+C:\Users\dadre\Documents\sources\Flow\Backend\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.InMemory.dll
