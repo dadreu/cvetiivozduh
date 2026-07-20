@@ -41,6 +41,18 @@ const getImageUrl = (flower: Flower) => {
   return fallbacks[flower.id % fallbacks.length];
 };
 
+const getFallbackDesc = (flower: Flower) => {
+  if (flower.description && flower.description !== 'Цветы и Воздух') return flower.description;
+  const descs = [
+    "Утонченная композиция для самых нежных чувств",
+    "Яркий микс свежайших цветов, дарящий радость",
+    "Классика, которая расскажет о вашей любви без слов",
+    "Стильный монобукет в премиальной упаковке",
+    "Воздушное облако из стойких цветов"
+  ];
+  return descs[flower.id % descs.length];
+};
+
 const cartTotal = computed(() => {
   return cart.value.reduce((total, item) => total + item.price * item.quantity, 0);
 });
@@ -111,7 +123,6 @@ const scrollToCatalog = () => {
         <img src="/catalog/frenchRose.jpg" alt="Фон" class="hero-img" />
         <div class="hero-overlay"></div>
       </div>
-      <!-- Changed to center alignment for perfect symmetry -->
       <div class="container hero-content">
         <div class="hero-text-box glass">
           <div class="hero-logo-wrap">
@@ -150,7 +161,7 @@ const scrollToCatalog = () => {
             <img :src="getImageUrl(flower)" :alt="flower.name" class="card-img" />
             <div class="card-overlay">
               <div class="overlay-content">
-                <p class="flower-desc" v-if="flower.description">{{ flower.description }}</p>
+                <p class="flower-desc">{{ getFallbackDesc(flower) }}</p>
                 <button class="add-btn" @click.stop="addToCart(flower)" aria-label="Добавить">В корзину</button>
               </div>
             </div>
@@ -163,39 +174,51 @@ const scrollToCatalog = () => {
       </div>
     </section>
 
-    <!-- Contacts & Socials -->
-    <section id="contacts-section" class="container section-split">
-      <div class="info-block glass">
-        <div class="section-header-small">
-          <h2>Наши Контакты</h2>
-          <p>Будем рады вас видеть</p>
-        </div>
-        <div class="info-content">
-          <p><strong>Адрес:</strong> г. Пермь, ул. Маршала Рыбалко 81а</p>
-          <p><strong>Время работы:</strong> Ежедневно 10:00 - 21:00</p>
-          
-          <div class="map-container" style="margin: 20px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-ambient);">
-            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ae0236a29bc62e3d36b28b6d3923f7e52003cba7dbab58ceeb8dc563b72ea98c4&amp;source=constructor" width="100%" height="250" frameborder="0"></iframe>
+    <!-- Contacts & Socials (MOVED UP) -->
+    <section id="contacts-section" class="container" style="margin-top: 100px;">
+      <div class="section-split">
+        <div class="info-block glass">
+          <div class="section-header-small">
+            <h2>Наши Контакты</h2>
+            <p>Будем рады вас видеть</p>
           </div>
+          <div class="info-content">
+            <p><strong>Адрес:</strong> г. Пермь, ул. Маршала Рыбалко 81а</p>
+            <p><strong>Время работы:</strong> Ежедневно 10:00 - 21:00</p>
+            <a href="tel:+79655556569" class="btn btn-primary contact-btn">Позвонить: +7 (965) 555-65-69</a>
+          </div>
+        </div>
 
-          <a href="tel:+79655556569" class="btn btn-primary contact-btn">Позвонить: +7 (965) 555-65-69</a>
+        <div class="info-block glass">
+          <div class="section-header-small">
+            <h2>Мы в соцсетях</h2>
+            <p>Следите за новинками</p>
+          </div>
+          <div class="info-content">
+            <p>Присоединяйтесь к нам, чтобы не пропустить свежие поставки и специальные предложения!</p>
+            <div class="social-buttons">
+              <a href="https://vk.com/market-43923180" target="_blank" class="social-btn btn-vk">
+                ВКонтакте
+              </a>
+              <a href="#" class="social-btn btn-tg">
+                Telegram
+              </a>
+              <a href="#" class="social-btn btn-inst">
+                Instagram
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="info-block glass">
-        <div class="section-header-small">
-          <h2>Мы в соцсетях</h2>
-          <p>Следите за новинками</p>
-        </div>
-        <div class="info-content">
-          <p>Присоединяйтесь к нам ВКонтакте и наслаждайтесь красотой цветов вместе с нами 🌷. Мы регулярно публикуем новые поступления, акции и рассказываем об искусстве флористики.</p>
-          <a href="https://vk.com/market-43923180" target="_blank" class="btn btn-outline contact-btn">Перейти ВКонтакте</a>
-        </div>
+      <!-- Map separated and full-width -->
+      <div class="map-container glass">
+        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ae0236a29bc62e3d36b28b6d3923f7e52003cba7dbab58ceeb8dc563b72ea98c4&amp;source=constructor" width="100%" height="350" frameborder="0"></iframe>
       </div>
     </section>
 
     <!-- Job Banner section -->
-    <section id="vacancies-section" class="container animate-fade-in" style="margin-bottom: 80px;">
+    <section id="vacancies-section" class="container animate-fade-in" style="margin-top: 100px; margin-bottom: 80px;">
       <div class="section-header">
         <h2>Вакансии</h2>
         <p>Присоединяйтесь к нашей команде</p>
@@ -272,7 +295,7 @@ const scrollToCatalog = () => {
 
 <style scoped>
 .home-wrapper {
-  padding-bottom: 30px; /* Reduced from 50px */
+  padding-bottom: 30px; 
 }
 
 /* Immersive Hero */
@@ -308,22 +331,22 @@ const scrollToCatalog = () => {
 .hero-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.3); /* Changed to symmetric dark overlay */
+  background: rgba(0,0,0,0.3); 
 }
 
 .hero-content {
   width: 100%;
   padding-top: 80px; 
   display: flex;
-  justify-content: center; /* PERFECT SYMMETRY */
+  justify-content: center; 
 }
 
 .hero-text-box {
   max-width: 650px;
   padding: 60px;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.85); /* Slightly more opaque */
-  text-align: center; /* Center text */
+  background: rgba(255, 255, 255, 0.85); 
+  text-align: center; 
   box-shadow: 0 30px 60px rgba(0,0,0,0.2);
 }
 
@@ -334,12 +357,12 @@ const scrollToCatalog = () => {
 }
 
 .hero-logo {
-  width: 160px; /* Even larger logo */
+  width: 160px; 
   height: 160px;
   border-radius: 50%;
   box-shadow: var(--shadow-ambient);
   object-fit: cover;
-  border: 4px solid #fff; /* Elegant border */
+  border: 4px solid #fff; 
 }
 
 .hero h1 {
@@ -416,7 +439,6 @@ const scrollToCatalog = () => {
   padding: 50px 60px;
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.85);
-  margin-bottom: 80px; /* Spacing below job banner */
 }
 
 .tag {
@@ -445,7 +467,6 @@ const scrollToCatalog = () => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  margin-bottom: 40px; /* Reduced from 120px to connect better with footer */
 }
 
 .info-block {
@@ -462,6 +483,67 @@ const scrollToCatalog = () => {
 .contact-btn {
   margin-top: 20px;
   display: inline-flex;
+}
+
+/* Social Buttons */
+.social-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 25px;
+}
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border-radius: 12px;
+  color: #fff !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.social-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+.social-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+  transform: skewX(-20deg);
+  transition: 0.5s;
+}
+.social-btn:hover::before {
+  left: 150%;
+}
+.btn-vk {
+  background: linear-gradient(135deg, #0077FF, #0055CC);
+}
+.btn-tg {
+  background: linear-gradient(135deg, #2AABEE, #229ED9);
+}
+.btn-inst {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.map-container {
+  margin-top: 40px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-ambient);
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.85);
+}
+.map-container iframe {
+  border-radius: calc(var(--radius-lg) - 5px);
+  display: block;
 }
 
 /* Bento Grid */
@@ -519,7 +601,7 @@ const scrollToCatalog = () => {
 .card-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   opacity: 0;
   transition: opacity 0.4s ease;
   display: flex;

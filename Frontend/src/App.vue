@@ -89,8 +89,8 @@ const scrollTo = (id: string) => {
             <div class="link-column">
               <h4>Связь</h4>
               <p>Ежедневно 10:00 - 21:00</p>
-              <p>+7 (965) 555-65-69</p>
-              <a href="https://vk.com/market-43923180" target="_blank" class="footer-link" style="margin-top: 15px; text-decoration: underline;">Мы ВКонтакте</a>
+              <a href="tel:+79655556569" class="footer-phone">+7 (965) 555-65-69</a>
+              <a href="https://vk.com/market-43923180" target="_blank" class="footer-vk">Мы ВКонтакте</a>
             </div>
           </div>
         </div>
@@ -310,6 +310,33 @@ const scrollTo = (id: string) => {
   text-align: center;
   color: rgba(255,255,255,0.3);
   font-size: 0.8rem;
+}
+
+.footer-phone {
+  display: block;
+  color: var(--color-accent-pink);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 15px 0;
+  transition: color 0.3s ease;
+}
+.footer-phone:hover {
+  color: #fff;
+}
+
+.footer-vk {
+  display: inline-block;
+  color: #0077FF;
+  font-weight: 600;
+  font-size: 1rem;
+  background: rgba(0, 119, 255, 0.1);
+  padding: 5px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+.footer-vk:hover {
+  background: #0077FF;
+  color: #fff;
 }
 
 @media (max-width: 900px) {
