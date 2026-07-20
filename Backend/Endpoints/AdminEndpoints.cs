@@ -27,6 +27,7 @@ public static class AdminEndpoints
             flower.Description = updatedFlower.Description;
             flower.Price = updatedFlower.Price;
             flower.CategoryId = updatedFlower.CategoryId;
+            flower.IsWide = updatedFlower.IsWide;
             if (!string.IsNullOrEmpty(updatedFlower.ImageUrl))
             {
                 flower.ImageUrl = updatedFlower.ImageUrl;

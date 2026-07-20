@@ -160,8 +160,8 @@ const scrollToCatalog = () => {
       <div v-if="loading" class="loading">Создаем красоту...</div>
       
       <div v-else-if="!showOrderForm && !orderSuccess" class="bento-grid">
-        <article class="bento-card" v-for="(flower, index) in flowers" :key="flower.id" 
-                 :class="{'bento-large': index === 0 || index === 3}">
+        <article class="bento-card" v-for="flower in flowers" :key="flower.id" 
+                 :class="{'bento-large': flower.isWide}">
           <div class="card-img-wrap">
             <img :src="getImageUrl(flower)" :alt="flower.name" class="card-img" />
             <div class="card-overlay">
@@ -372,6 +372,12 @@ const scrollToCatalog = () => {
   background: rgba(255, 255, 255, 0.85); 
   text-align: center; 
   box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.hero-text-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.15);
 }
 
 .hero-logo-wrap {
@@ -468,6 +474,12 @@ const scrollToCatalog = () => {
   background: rgba(255, 255, 255, 0.85);
   display: flex;
   flex-direction: column;
+  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.info-block:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.15);
 }
 
 .info-content {
@@ -764,7 +776,8 @@ const scrollToCatalog = () => {
   transform: translateY(-5px);
 }
 .job-banner-luxury:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.15);
 }
 
 .empty-vacancies {
@@ -1030,6 +1043,11 @@ const scrollToCatalog = () => {
 
 @keyframes pulse-ring {
   0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+}
+
+@keyframes slowPan {
+  0% { transform: scale(1.05) translate(0, 0); }
+  100% { transform: scale(1.1) translate(-2%, -2%); }
 }
 </style>

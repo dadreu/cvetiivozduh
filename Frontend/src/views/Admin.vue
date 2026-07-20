@@ -17,7 +17,7 @@ const loading = ref(true);
 const showFlowerModal = ref(false);
 const showVacancyModal = ref(false);
 
-const flowerForm = ref({ id: 0, name: '', description: '', price: 0, categoryId: 1, imageUrl: '' });
+const flowerForm = ref({ id: 0, name: '', description: '', price: 0, categoryId: 1, imageUrl: '', isWide: false });
 const vacancyForm = ref({ id: 0, title: '', description: '', isActive: true });
 
 onMounted(async () => {
@@ -52,7 +52,7 @@ const openFlowerModal = (flower: any = null) => {
   if (flower) {
     flowerForm.value = { ...flower };
   } else {
-    flowerForm.value = { id: 0, name: '', description: '', price: 0, categoryId: categories.value[0]?.id || 1, imageUrl: '' };
+    flowerForm.value = { id: 0, name: '', description: '', price: 0, categoryId: categories.value[0]?.id || 1, imageUrl: '', isWide: false };
   }
   showFlowerModal.value = true;
 };
@@ -243,6 +243,10 @@ const deleteVacancy = async (id: number) => {
             <div v-if="flowerForm.imageUrl" class="img-preview">
               <img :src="flowerForm.imageUrl" />
             </div>
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="isWideFlower" v-model="flowerForm.isWide" />
+            <label for="isWideFlower">Широкая карточка (на 2 колонки)</label>
           </div>
           <div class="modal-actions">
             <button type="button" class="btn-text" @click="showFlowerModal = false">Отмена</button>
