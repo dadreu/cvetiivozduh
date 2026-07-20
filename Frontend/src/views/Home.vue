@@ -350,6 +350,11 @@ const scrollToCatalog = () => {
   object-position: center 30%;
   transform: scale(1.05);
   animation: slowPan 20s infinite alternate linear;
+  transition: filter 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.hero:has(.hero-text-box:hover) .hero-img {
+  filter: blur(8px) brightness(0.85);
 }
 
 .hero-overlay {
@@ -372,12 +377,13 @@ const scrollToCatalog = () => {
   background: rgba(255, 255, 255, 0.85); 
   text-align: center; 
   box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.7s cubic-bezier(0.19, 1, 0.22, 1), background 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .hero-text-box:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+  transform: scale(1.03);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.25);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .hero-logo-wrap {

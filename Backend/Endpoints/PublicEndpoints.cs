@@ -19,7 +19,8 @@ public static class PublicEndpoints
                     Id = f.Id,
                     Name = f.Name,
                     Price = f.Price,
-                    ImageUrl = f.ImageUrl
+                    ImageUrl = f.ImageUrl,
+                    IsWide = f.IsWide
                 })
                 .ToListAsync();
 
@@ -40,7 +41,8 @@ public static class PublicEndpoints
                     Price = f.Price,
                     ImageUrl = f.ImageUrl,
                     CategoryId = f.CategoryId,
-                    CategoryName = f.Category.Name
+                    CategoryName = f.Category.Name,
+                    IsWide = f.IsWide
                 })
                 .FirstOrDefaultAsync();
 
