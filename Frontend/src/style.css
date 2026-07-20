@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Скандинавский минимализм - Цветовая палитра */
+  --color-bg-base: #F9F9F6;
+  --color-bg-alt: #F5F5F5;
+  --color-text-main: #2C2C2C;
+  --color-text-muted: #6B6B6B;
+  
+  --color-secondary-dusty-blue: #7C98AB;
+  --color-secondary-sage: #9CAD92;
+  --color-secondary-beige: #E6DED5;
+
+  --color-accent-terracotta: #C97A7E;
+  --color-accent-navy: #2A3644;
+  
+  --font-family-base: 'Inter', sans-serif;
+  
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 64px;
+  
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 500;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-main);
+}
+
+a {
+  color: var(--color-accent-navy);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-accent-terracotta);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* Базовые UI-компоненты */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-text-main);
+  color: var(--color-bg-base);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-navy);
+}
+
+.btn-accent {
+  background-color: var(--color-accent-terracotta);
+  color: #fff;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
