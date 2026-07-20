@@ -23,6 +23,23 @@ const customerPhone = ref('');
 const deliveryAddress = ref('');
 const orderSuccess = ref(false);
 
+const fallbacks = [
+  '/catalog/frenchRose.jpg',
+  '/catalog/compose2.jpg',
+  '/catalog/bee.jpg',
+  '/catalog/gypsofils.jpg',
+  '/catalog/i love u.jpg',
+  '/catalog/Lylyi.jpg',
+  '/catalog/bant.jpg',
+  '/catalog/softy.jpg'
+];
+
+const getImageUrl = (flower: Flower) => {
+  if (flower.imageUrl) return flower.imageUrl;
+  // Use modulo on ID to get a consistent pseudo-random image
+  return fallbacks[flower.id % fallbacks.length];
+};
+
 const cartTotal = computed(() => {
   return cart.value.reduce((total, item) => total + item.price * item.quantity, 0);
 });
@@ -162,7 +179,7 @@ const scrollToCatalog = () => {
         <article class="bento-card" v-for="(flower, index) in flowers" :key="flower.id" 
                  :class="{'bento-large': index === 0 || index === 3}">
           <div class="card-img-wrap">
-            <img :src="flower.imageUrl || '/catalog/compose2.jpg'" :alt="flower.name" class="card-img" />
+            <img :src="getImageUrl(flower)" :alt="flower.name" class="card-img" />
             <div class="card-overlay">
               <button class="add-btn" @click="addToCart(flower)" aria-label="Добавить">В корзину</button>
             </div>
