@@ -90,7 +90,12 @@ const scrollTo = (id: string) => {
               <h4>Связь</h4>
               <p>Ежедневно 10:00 - 21:00</p>
               <a href="tel:+79655556569" class="footer-phone">+7 (965) 555-65-69</a>
-              <a href="https://vk.com/market-43923180" target="_blank" class="footer-vk">Мы ВКонтакте</a>
+              <div class="footer-socials">
+                <a href="https://vk.com/market-43923180" target="_blank" class="footer-social-link">ВКонтакте</a>
+                <a href="#" target="_blank" class="footer-social-link">Telegram</a>
+                <a href="#" target="_blank" class="footer-social-link">Instagram</a>
+                <a href="#" target="_blank" class="footer-social-link">WhatsApp</a>
+              </div>
             </div>
           </div>
         </div>
@@ -324,19 +329,21 @@ const scrollTo = (id: string) => {
   color: #fff;
 }
 
-.footer-vk {
-  display: inline-block;
-  color: #0077FF;
-  font-weight: 600;
-  font-size: 1rem;
-  background: rgba(0, 119, 255, 0.1);
-  padding: 5px 12px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
+.footer-socials {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 10px;
+  margin-top: 20px;
 }
-.footer-vk:hover {
-  background: #0077FF;
-  color: #fff;
+
+.footer-social-link {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-social-link:hover {
+  color: var(--color-accent-pink);
 }
 
 @media (max-width: 900px) {

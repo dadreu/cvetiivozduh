@@ -184,14 +184,15 @@ const scrollToCatalog = () => {
           </div>
           <div class="info-content">
             <p style="margin-bottom: 5px;"><strong>Адрес:</strong> г. Пермь, ул. Маршала Рыбалко 81а</p>
-            <a href="https://yandex.ru/maps/-/CDu~m-pA" target="_blank" class="map-link">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              Показать на Яндекс.Картах
+            <a href="https://yandex.ru/maps/?text=Пермь,+ул.+Маршала+Рыбалко,+81а" target="_blank" class="map-link-text">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>Показать на Яндекс.Картах</span>
             </a>
-            <p style="margin-top: 20px;"><strong>Время работы:</strong> Ежедневно 10:00 - 21:00</p>
             
-            <div style="margin-top: 25px;">
-              <a href="tel:+79655556569" class="btn-premium">Позвонить: +7 (965) 555-65-69</a>
+            <p style="margin-top: 25px; margin-bottom: 5px;"><strong>Время работы:</strong> Ежедневно 10:00 - 21:00</p>
+            
+            <div style="margin-top: 15px;">
+              <a href="tel:+79655556569" class="contact-phone-link">+7 (965) 555-65-69</a>
             </div>
           </div>
         </div>
@@ -203,10 +204,12 @@ const scrollToCatalog = () => {
           </div>
           <div class="info-content">
             <p>Присоединяйтесь к нам, чтобы не пропустить свежие поставки и специальные предложения!</p>
-            <div class="social-links-elegant">
-              <a href="https://vk.com/market-43923180" target="_blank" class="social-link">ВКонтакте</a>
-              <a href="#" target="_blank" class="social-link">Telegram</a>
-              <a href="#" target="_blank" class="social-link">Instagram</a>
+            
+            <div class="social-text-links">
+              <a href="https://vk.com/market-43923180" target="_blank" class="social-text-link">ВКонтакте</a>
+              <a href="#" target="_blank" class="social-text-link">Telegram</a>
+              <a href="#" target="_blank" class="social-text-link">Instagram</a>
+              <a href="#" target="_blank" class="social-text-link">WhatsApp</a>
             </div>
           </div>
         </div>
@@ -484,9 +487,15 @@ const scrollToCatalog = () => {
 }
 
 .info-block {
-  padding: 50px;
+  padding: 40px;
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  flex-direction: column;
+}
+
+.info-content {
+  flex: 1;
 }
 
 .info-content p {
@@ -495,68 +504,62 @@ const scrollToCatalog = () => {
   color: var(--color-text-main);
 }
 
-.map-link {
-  font-family: var(--font-family-base);
-  font-size: 0.85rem;
-  color: var(--color-text-main);
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+/* Map Text Link */
+.map-link-text {
   display: inline-flex;
   align-items: center;
-  margin-top: 10px;
-  padding: 8px 20px;
-  border: 1px solid rgba(0,0,0,0.15);
-  border-radius: 20px;
+  gap: 8px;
+  color: var(--color-text-muted);
+  font-family: var(--font-family-base);
+  font-size: 0.95rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  text-decoration: none;
+  margin-top: 5px;
+  transition: color 0.3s ease;
 }
-.map-link:hover {
-  background: var(--color-text-main);
-  color: #fff;
+.map-link-text:hover {
+  color: var(--color-accent-pink);
 }
 
-/* Corrected Elegant Social Links */
-.social-links-elegant {
+/* Big Contact Phone Link */
+.contact-phone-link {
+  font-size: 1.8rem;
+  font-family: var(--font-family-base);
+  color: var(--color-text-main);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  margin-top: 15px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.contact-phone-link:hover {
+  color: var(--color-accent-pink);
+  transform: translateY(-2px);
+}
+
+/* Minimalist Social Links */
+.social-text-links {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 25px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
-.social-link {
+.social-text-link {
   font-family: var(--font-family-base);
   font-size: 1rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 2px;
   color: var(--color-text-muted);
   text-decoration: none;
   position: relative;
-  transition: color 0.3s ease;
-  display: inline-flex;
-  align-items: center;
   width: fit-content;
+  transition: color 0.3s ease;
+  line-height: 1.2;
 }
 
-.social-link::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--color-accent-pink);
-  transition: width 0.3s ease;
+.social-text-link:hover {
+  color: var(--color-accent-pink);
 }
 
-.social-link:hover {
-  color: var(--color-text-main);
-}
-
-.social-link:hover::after {
-  width: 100%;
-}
 
 /* Luxury Job Banner */
 .job-banner-luxury {
